@@ -1,0 +1,8 @@
+{
+  "backendUrl": "https://accounting.example.com",
+  "dataDir": "C:\\ProgramData\\AccountingTallyConnector\\data",
+  "adapter": "local",
+  "authorizedCompanyIds": [],
+  "tallyPort": 9000,
+  "requestTimeoutMs": 5000
+}

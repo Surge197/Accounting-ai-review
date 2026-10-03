@@ -1,0 +1,12 @@
+{
+  "backendUrl": "http://127.0.0.1:3000",
+  "allowInsecureLoopback": true,
+  "dataDir": "./local-data",
+  "adapter": "mock",
+  "authorizedCompanyIds": ["MOCK:alpha"],
+  "mockAvailable": true,
+  "mockCompanies": [
+    { "id": "MOCK:alpha", "name": "MOCK ONLY - Alpha Company" },
+    { "id": "MOCK:unauthorized", "name": "MOCK ONLY - Unauthorized Company" }
+  ]
+}

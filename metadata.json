@@ -1,0 +1,7 @@
+{
+  "name": "Accounting AI Review",
+  "description": "AI-assisted accounting review engine for TallyPrime and Zoho Books data to detect inconsistencies, duplicates, GST mismatches, and unusual transactions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
