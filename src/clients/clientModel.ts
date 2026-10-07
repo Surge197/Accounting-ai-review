@@ -8,7 +8,7 @@ import { ClientSnapshot } from '../snapshot/snapshotEngine';
 
 export type ConnectionStatus = 'CONNECTED' | 'FILE_LOADED' | 'SYNC_PENDING' | 'SYNC_FAILED';
 
-export type DataSourceType = 'LIVE' | 'FILE' | 'SAMPLE';
+export type DataSourceType = 'LIVE' | 'FILE';
 
 export type ClientReviewStatus = 'IDLE' | 'SYNCING' | 'ANALYZING' | 'COMPLETED' | 'FAILED';
 
@@ -38,7 +38,7 @@ export interface ClientCompany {
   industry: string;
   group: string;
   connectionStatus: ConnectionStatus;
-  dataSourceType: DataSourceType; // LIVE | FILE | SAMPLE
+  dataSourceType: DataSourceType; // LIVE | FILE
   liveConfig?: LiveConnectionConfig;
   connectionEndpoint?: string;
   organizationId?: string;
@@ -50,7 +50,7 @@ export interface ClientCompany {
   isSelected: boolean;
   reviewStatus: ClientReviewStatus;
   lastReviewedAt?: string;
-  lastSyncType?: 'FULL' | 'INCREMENTAL' | 'FILE_IMPORT' | 'SAMPLE_BENCHMARK';
+  lastSyncType?: 'FULL' | 'INCREMENTAL' | 'FILE_IMPORT';
   lastSyncTimestamp?: string;
   syncLogs: SyncLogEntry[];
   currentSnapshot?: ClientSnapshot;

@@ -115,11 +115,6 @@ export const ClientRiskMatrixTable: React.FC<ClientRiskMatrixTableProps> = ({
                           FILE
                         </span>
                       )}
-                      {item.dataSourceType === 'SAMPLE' && (
-                        <span className="text-[9px] text-indigo-700 bg-indigo-50 px-1 rounded">
-                          BENCHMARK
-                        </span>
-                      )}
                     </div>
                   </td>
 

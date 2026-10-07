@@ -127,7 +127,7 @@ export function generateMasterReportHtml(
           <div class="border border-slate-200 p-3 rounded text-xs leading-relaxed page-break-inside-avoid">
             <div class="flex items-center justify-between font-semibold mb-1">
               <div>
-                <span class="text-slate-900">${f.clientName}</span> · <span class="text-slate-500">${f.software} [${f.source || 'SAMPLE'}]</span> · <span class="text-slate-700">${f.issueType}</span> (${f.voucherNumber})
+                <span class="text-slate-900">${f.clientName}</span> · <span class="text-slate-500">${f.software} [${f.source || 'UNKNOWN'}]</span> · <span class="text-slate-700">${f.issueType}</span> (${f.voucherNumber})
               </div>
               <div class="${f.severity === 'Critical' ? 'text-red-700' : 'text-amber-700'} uppercase font-bold text-[10px]">
                 ${f.severity} · ${formatInr(f.amount)}

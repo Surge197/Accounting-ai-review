@@ -214,7 +214,6 @@ export const ClientManagerSection: React.FC<ClientManagerSectionProps> = ({
             <option value="ALL">All Data Sources</option>
             <option value="LIVE">Live API/ODBC Only</option>
             <option value="FILE">File Import Only</option>
-            <option value="SAMPLE">Benchmark Sample</option>
           </select>
         </div>
 
@@ -316,11 +315,6 @@ export const ClientManagerSection: React.FC<ClientManagerSectionProps> = ({
                       {client.dataSourceType === 'FILE' && (
                         <span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-600 bg-slate-100 px-1.5 py-0.2 rounded border border-slate-200">
                           <FileSpreadsheet className="w-2.5 h-2.5 text-slate-500" /> FILE
-                        </span>
-                      )}
-                      {client.dataSourceType === 'SAMPLE' && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-indigo-700 bg-indigo-50 px-1.5 py-0.2 rounded border border-indigo-200">
-                          BENCHMARK SAMPLE
                         </span>
                       )}
                     </div>

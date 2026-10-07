@@ -119,7 +119,7 @@ export function downloadMasterExcelReport(
     findingsRows.push([
       f.clientName,
       f.software,
-      f.source || 'SAMPLE',
+      f.source || 'UNKNOWN',
       f.id,
       f.severity,
       f.issueType,

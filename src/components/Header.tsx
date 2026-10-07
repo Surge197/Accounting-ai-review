@@ -2,7 +2,6 @@ import React from 'react';
 import { ShieldCheck, FileSpreadsheet, Users, UserCheck, Settings } from 'lucide-react';
 
 interface HeaderProps {
-  onLoadSample: () => void;
   hasData: boolean;
   viewMode: 'multi_client' | 'single_client';
   onViewModeChange: (mode: 'multi_client' | 'single_client') => void;
@@ -11,7 +10,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  onLoadSample,
   hasData,
   viewMode,
   onViewModeChange,
@@ -85,15 +83,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
-          <button
-            onClick={onLoadSample}
-            type="button"
-            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-md border border-slate-300 text-slate-700 bg-slate-50 hover:bg-slate-100 transition-colors"
-            title="Reset to default multi-client benchmark audit dataset"
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-slate-500" />
-            <span className="hidden md:inline">Reset Data</span>
-          </button>
+
 
           <div className="hidden lg:flex items-center gap-1 text-[11px] text-slate-500 bg-slate-100 px-2 py-1 rounded">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />

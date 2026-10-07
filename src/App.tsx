@@ -12,14 +12,7 @@ import {
   FindingSeverity,
   ReviewReport,
 } from './normalizer/commonModel';
-import {
-  SAMPLE_TALLY_COMPANY,
-  SAMPLE_TALLY_TRANSACTIONS,
-  SAMPLE_ZOHO_COMPANY,
-  SAMPLE_ZOHO_TRANSACTIONS,
-  SAMPLE_PERIOD_FROM,
-  SAMPLE_PERIOD_TO,
-} from './sample/sampleData';
+
 import { runAccountingRules } from './rules/ruleEngine';
 import { enrichFindingsWithAi } from './ai/aiExplainer';
 
@@ -31,7 +24,6 @@ import {
   DataSourceType,
   LiveConnectionConfig,
 } from './clients/clientModel';
-import { INITIAL_CLIENTS } from './clients/defaultClients';
 import { runAllClientReviews } from './clients/clientReviewRunner';
 import { ClientManagerSection } from './components/clients/ClientManagerSection';
 import { BatchReviewProgressModal } from './components/clients/BatchReviewProgressModal';
@@ -55,7 +47,7 @@ export default function App() {
   // ========================================================
   // MULTI-CLIENT PLATFORM STATE
   // ========================================================
-  const [clients, setClients] = useState<ClientCompany[]>(INITIAL_CLIENTS);
+  const [clients, setClients] = useState<ClientCompany[]>([]);
   const [portfolioReport, setPortfolioReport] = useState<ConsolidatedPortfolioReport | null>(null);
   const [batchProgress, setBatchProgress] = useState<BatchReviewProgress | null>(null);
   const [isBatchRunning, setIsBatchRunning] = useState<boolean>(false);
@@ -78,11 +70,11 @@ export default function App() {
   // SINGLE-CLIENT MVP STATE (100% PRESERVED & FUNCTIONAL)
   // ========================================================
   const [software, setSoftware] = useState<AccountingSoftware>('TallyPrime');
-  const [companyName, setCompanyName] = useState<string>(SAMPLE_TALLY_COMPANY);
-  const [periodFrom, setPeriodFrom] = useState<string>(SAMPLE_PERIOD_FROM);
-  const [periodTo, setPeriodTo] = useState<string>(SAMPLE_PERIOD_TO);
-  const [transactions, setTransactions] = useState<AccountingTransaction[]>(SAMPLE_TALLY_TRANSACTIONS);
-  const [activeFileName, setActiveFileName] = useState<string>('Sample_TallyPrime_FY24-25.xml');
+  const [companyName, setCompanyName] = useState<string>('');
+  const [periodFrom, setPeriodFrom] = useState<string>('');
+  const [periodTo, setPeriodTo] = useState<string>('');
+  const [transactions, setTransactions] = useState<AccountingTransaction[]>([]);
+  const [activeFileName, setActiveFileName] = useState<string>('');
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [reviewReport, setReviewReport] = useState<ReviewReport | null>(null);
   const [activeSeverityFilter, setActiveSeverityFilter] = useState<FindingSeverity | 'ALL'>('ALL');
@@ -282,43 +274,13 @@ export default function App() {
   // --------------------------------------------------------
   const handleSelectSoftware = (newSoftware: AccountingSoftware) => {
     setSoftware(newSoftware);
-    if (newSoftware === 'TallyPrime') {
-      setCompanyName(SAMPLE_TALLY_COMPANY);
-      setTransactions(SAMPLE_TALLY_TRANSACTIONS);
-      setActiveFileName('Sample_TallyPrime_FY24-25.xml');
-    } else {
-      setCompanyName(SAMPLE_ZOHO_COMPANY);
-      setTransactions(SAMPLE_ZOHO_TRANSACTIONS);
-      setActiveFileName('Sample_ZohoBooks_Export_Q1.csv');
-    }
+    setCompanyName('');
+    setTransactions([]);
+    setActiveFileName('');
     setReviewReport(null);
   };
 
-  const handleLoadSample = () => {
-    // Reset Multi-Client default list
-    setClients(INITIAL_CLIENTS);
-    setPortfolioReport(null);
-    setActiveDrillDownClientId(null);
 
-    // Reset Single Client MVP
-    if (software === 'TallyPrime') {
-      setCompanyName(SAMPLE_TALLY_COMPANY);
-      setPeriodFrom(SAMPLE_PERIOD_FROM);
-      setPeriodTo(SAMPLE_PERIOD_TO);
-      setTransactions(SAMPLE_TALLY_TRANSACTIONS);
-      setActiveFileName('Sample_TallyPrime_Audit_Batch.xml');
-    } else {
-      setCompanyName(SAMPLE_ZOHO_COMPANY);
-      setPeriodFrom(SAMPLE_PERIOD_FROM);
-      setPeriodTo(SAMPLE_PERIOD_TO);
-      setTransactions(SAMPLE_ZOHO_TRANSACTIONS);
-      setActiveFileName('Sample_ZohoBooks_Invoices_Bills.csv');
-    }
-    setReviewReport(null);
-
-    // Run batch review
-    handleRunSelectedReviews(false);
-  };
 
   const handleTransactionsLoaded = (loadedTx: AccountingTransaction[], fileName: string) => {
     setTransactions(loadedTx);
@@ -364,10 +326,7 @@ export default function App() {
     }
   };
 
-  // Auto-run initial multi-client review on mount so auditor sees instant populated results
-  useEffect(() => {
-    handleRunSelectedReviews(false);
-  }, []);
+
 
   // Find active drill-down client if any
   const drillDownClient = activeDrillDownClientId
@@ -378,7 +337,6 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
       {/* 1. Universal Top Header */}
       <Header
-        onLoadSample={handleLoadSample}
         hasData={clients.length > 0}
         viewMode={viewMode}
         onViewModeChange={(mode) => {

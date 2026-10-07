@@ -39,7 +39,8 @@ export const ConnectionSettingsModal: React.FC<ConnectionSettingsModalProps> = (
 }) => {
   if (!isOpen || !client) return null;
 
-  const [mode, setMode] = useState<DataSourceType>(client.dataSourceType || 'SAMPLE');
+  const initialMode = client.dataSourceType === 'LIVE' || client.dataSourceType === 'FILE' ? client.dataSourceType : 'FILE';
+  const [mode, setMode] = useState<DataSourceType>(initialMode);
   // Tally state
   const [tallyHost, setTallyHost] = useState(client.liveConfig?.tallyHost || 'localhost');
   const [tallyPort, setTallyPort] = useState(client.liveConfig?.tallyPort || 9000);
@@ -176,23 +177,6 @@ export const ConnectionSettingsModal: React.FC<ConnectionSettingsModalProps> = (
               <span className="text-[10px] text-slate-500">XML, Excel, CSV, JSON</span>
             </button>
 
-            <button
-              type="button"
-              onClick={() => setMode('SAMPLE')}
-              className={`p-2.5 rounded-lg border text-left transition-all flex flex-col gap-0.5 ${
-                mode === 'SAMPLE'
-                  ? 'border-indigo-600 bg-indigo-50/70 text-indigo-950 ring-1 ring-indigo-600'
-                  : 'border-slate-200 hover:border-slate-300 text-slate-700'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold flex items-center gap-1">
-                  <Radio className="w-3.5 h-3.5 text-indigo-600" /> Benchmark
-                </span>
-                {mode === 'SAMPLE' && <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />}
-              </div>
-              <span className="text-[10px] text-slate-500">Sample audit dataset</span>
-            </button>
           </div>
         </div>
 

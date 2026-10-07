@@ -31,7 +31,7 @@ export interface AccountingTransaction {
   // Data collection & isolation traceability
   clientId?: string;
   clientName?: string;
-  source?: 'LIVE' | 'FILE' | 'SAMPLE';
+  source?: 'LIVE' | 'FILE';
   sourceTransactionId?: string;
 }
 
@@ -51,7 +51,7 @@ export interface ReviewFinding {
   transactionId?: string;
   // Traceability
   clientId?: string;
-  source?: 'LIVE' | 'FILE' | 'SAMPLE';
+  source?: 'LIVE' | 'FILE';
 }
 
 export interface ReviewSummary {

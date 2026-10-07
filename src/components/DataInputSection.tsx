@@ -154,7 +154,7 @@ export const DataInputSection: React.FC<DataInputSectionProps> = ({
           <span>
             {transactions.length > 0
               ? `${transactions.length} records staged for rule verification`
-              : 'Waiting for data import or sample selection'}
+              : 'Waiting for data import'}
           </span>
         </div>
 

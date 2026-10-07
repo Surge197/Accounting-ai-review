@@ -22,7 +22,7 @@ export interface ClientSnapshot {
   clientId: string;
   clientName: string;
   timestamp: string;
-  sourceType: 'LIVE' | 'FILE' | 'SAMPLE';
+  sourceType: 'LIVE' | 'FILE';
   transactionCount: number;
   transactions: AccountingTransaction[];
   diffFromPrevious?: SnapshotDiff;
@@ -131,7 +131,7 @@ export function compareTransactionsWithSnapshot(
 export function createClientSnapshot(
   clientId: string,
   clientName: string,
-  sourceType: 'LIVE' | 'FILE' | 'SAMPLE',
+  sourceType: 'LIVE' | 'FILE',
   newTransactions: AccountingTransaction[],
   previousSnapshot?: ClientSnapshot
 ): ClientSnapshot {
